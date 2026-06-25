@@ -7,27 +7,18 @@
   <!-- 載入 Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- 載入 React -->
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <!-- 載入 Babel 以便在瀏覽器中編譯 JSX -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <!-- 載入 Babel -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
-  <div id="root"></div>
+  <div id="root">Loading...</div>
 
-  <!-- 加入 data-presets="react" 確保 Babel 正確識別 React 環境 -->
-  <script type="text/babel" data-presets="react">
-    // 確保 Babel 使用 React.createElement，避免自動產生 import 導致瀏覽器報錯
-    /** @jsx React.createElement */
-    /** @jsxFrag React.Fragment */
-
-    // 🛑 絕對不要在這裡寫任何 import 語法！ 🛑
-    // 您遇到的錯誤是因為瀏覽器不接受單一檔案中的 import 語法 (或者 Babel 試圖編譯為模組)。
-    // 這裡已經幫您設定好全域變數，請「直接完整複製」這份檔案即可，不要把原本檔案最上方的 import 貼回來。
-
+  <script type="text/babel">
     const { useState } = React;
 
-    // --- 圖示元件區 (替換原本的 lucide-react 以確保單一檔案可直接執行) ---
+    // --- 圖示元件區 ---
     const IconWrapper = ({ size = 24, className = "", children }) => (
       <svg width={size} height={size} className={className} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         {children}
@@ -46,73 +37,12 @@
     const Phone = (p) => <IconWrapper {...p}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></IconWrapper>;
     const ChevronRight = (p) => <IconWrapper {...p}><path d="m9 18 6-6-6-6"/></IconWrapper>;
 
-    // --- 資料區：整合檢核表與簡報重點 ---
     const topics = [
-      {
-        id: 'sleep',
-        title: '睡眠安全',
-        icon: <BedDouble className="w-8 h-8 text-indigo-500" />,
-        color: 'bg-indigo-50 border-indigo-200',
-        description: '預防嬰兒猝死症，建立安全的睡眠環境。',
-        points: [
-          '仰睡是唯一推薦的安全睡姿。',
-          '嬰兒床鋪表面必須堅實平整，不要放置枕頭、被褥或填充玩具。',
-          '同室不同床：建議與父母同室但不同床。',
-          '避免環境過熱，不要穿著太多衣物。'
-        ]
-      },
-      {
-        id: 'choking',
-        title: '防誤食與梗塞',
-        icon: <Pill className="w-8 h-8 text-emerald-500" />,
-        color: 'bg-emerald-50 border-emerald-200',
-        description: '守護孩子的呼吸道，危險物品請收好。',
-        points: [
-          '危險物品(藥品、電池、清潔劑)應高於110公分存放或上鎖。',
-          '清潔劑請保留原瓶包裝，絕不分裝至飲料瓶。',
-          '玩具大小需大於3.2公分，避免幼童吞入。',
-          '避免讓幼兒單獨食用果凍、堅果等易梗塞食物。'
-        ]
-      },
-      {
-        id: 'drowning',
-        title: '溺水預防',
-        icon: <Droplet className="w-8 h-8 text-blue-500" />,
-        color: 'bg-blue-50 border-blue-200',
-        description: '溺水往往發生在無聲之中，全程陪同最重要。',
-        points: [
-          '洗澡時大人絕對不可離開，連接電話的短暫時間也不行。',
-          '浴缸、水桶使用完畢務必倒掉儲水。',
-          '若家中有蓄水池或漁塭，務必加裝防墜圍籬。',
-          '戲水時依據孩子手臂長度判定安全水位。'
-        ]
-      },
-      {
-        id: 'burns',
-        title: '防燙與觸電',
-        icon: <Flame className="w-8 h-8 text-orange-500" />,
-        color: 'bg-orange-50 border-orange-200',
-        description: '廚房與電器是居家危險源，安全檢查不可省。',
-        points: [
-          '熱水器溫度建議調降至攝氏50度以下。',
-          '餐桌不使用長桌巾，防止孩子拉扯導致湯水潑灑。',
-          '未使用之插座務必加上安全防護蓋。',
-          '高熱家電電線應妥善隱蔽，避免垂墜。'
-        ]
-      },
-      {
-        id: 'falls',
-        title: '防墜與跌倒',
-        icon: <Baby className="w-8 h-8 text-rose-500" />,
-        color: 'bg-rose-50 border-rose-200',
-        description: '防墜措施做得好，孩子長大沒煩惱。',
-        points: [
-          '陽台欄杆高度應高於110公分，間距小於10公分。',
-          '窗邊及陽台嚴禁放置可供攀爬之家具或盆栽。',
-          '樓梯口設置高於85公分之穩固安全柵欄。',
-          '浴室地面加裝防滑設施，家具銳角使用防撞護條。'
-        ]
-      }
+      { id: 'sleep', title: '睡眠安全', icon: <BedDouble className="w-8 h-8 text-indigo-500" />, color: 'bg-indigo-50 border-indigo-200', description: '預防嬰兒猝死症，建立安全的睡眠環境。', points: ['仰睡是唯一推薦的安全睡姿。', '嬰兒床鋪表面必須堅實平整，不要放置枕頭、被褥或填充玩具。', '同室不同床：建議與父母同室但不同床。', '避免環境過熱，不要穿著太多衣物。'] },
+      { id: 'choking', title: '防誤食與梗塞', icon: <Pill className="w-8 h-8 text-emerald-500" />, color: 'bg-emerald-50 border-emerald-200', description: '守護孩子的呼吸道，危險物品請收好。', points: ['危險物品(藥品、電池、清潔劑)應高於110公分存放或上鎖。', '清潔劑請保留原瓶包裝，絕不分裝至飲料瓶。', '玩具大小需大於3.2公分，避免幼童吞入。', '避免讓幼兒單獨食用果凍、堅果等易梗塞食物。'] },
+      { id: 'drowning', title: '溺水預防', icon: <Droplet className="w-8 h-8 text-blue-500" />, color: 'bg-blue-50 border-blue-200', description: '溺水往往發生在無聲之中，全程陪同最重要。', points: ['洗澡時大人絕對不可離開，連接電話的短暫時間也不行。', '浴缸、水桶使用完畢務必倒掉儲水。', '若家中有蓄水池或漁塭，務必加裝防墜圍籬。', '戲水時依據孩子手臂長度判定安全水位。'] },
+      { id: 'burns', title: '防燙與觸電', icon: <Flame className="w-8 h-8 text-orange-500" />, color: 'bg-orange-50 border-orange-200', description: '廚房與電器是居家危險源，安全檢查不可省。', points: ['熱水器溫度建議調降至攝氏50度以下。', '餐桌不使用長桌巾，防止孩子拉扯導致湯水潑灑。', '未使用之插座務必加上安全防護蓋。', '高熱家電電線應妥善隱蔽，避免垂墜。'] },
+      { id: 'falls', title: '防墜與跌倒', icon: <Baby className="w-8 h-8 text-rose-500" />, color: 'bg-rose-50 border-rose-200', description: '防墜措施做得好，孩子長大沒煩惱。', points: ['陽台欄杆高度應高於110公分，間距小於10公分。', '窗邊及陽台嚴禁放置可供攀爬之家具或盆栽。', '樓梯口設置高於85公分之穩固安全柵欄。', '浴室地面加裝防滑設施，家具銳角使用防撞護條。'] }
     ];
 
     const checklistItems = [
@@ -132,37 +62,20 @@
       const [activeTab, setActiveTab] = useState('home');
       const [selectedTopic, setSelectedTopic] = useState(null);
       const [checkedState, setCheckedState] = useState({});
-
       const handleCheck = (id) => setCheckedState(prev => ({ ...prev, [id]: !prev[id] }));
-      
-      const totalItems = checklistItems.length;
-      const checkedCount = Object.values(checkedState).filter(Boolean).length;
-      const score = totalItems > 0 ? Math.round((checkedCount / totalItems) * 100) : 0;
+      const score = Math.round((Object.values(checkedState).filter(Boolean).length / checklistItems.length) * 100);
 
       return (
         <div className="min-h-screen bg-gray-50 text-gray-800">
           <nav className="bg-white border-b sticky top-0 z-50">
             <div className="max-w-4xl mx-auto px-4 flex justify-between items-center h-16">
-              <div 
-                className="flex items-center gap-2 cursor-pointer font-bold text-lg" 
-                onClick={() => { setActiveTab('home'); setSelectedTopic(null); }}
-              >
+              <div className="flex items-center gap-2 cursor-pointer font-bold text-lg" onClick={() => { setActiveTab('home'); setSelectedTopic(null); }}>
                 <Shield className="text-indigo-600" /> 安全偵查隊
               </div>
               <div className="flex gap-2">
-                {[ 
-                  { id: 'home', label: '主題', icon: <Home size={18}/> }, 
-                  { id: 'checklist', label: '清單', icon: <SquareCheck size={18}/> }, 
-                  { id: 'emergency', label: '急救', icon: <AlertTriangle size={18}/> } 
-                ].map(tab => (
-                  <button 
-                    key={tab.id} 
-                    onClick={() => { setActiveTab(tab.id); setSelectedTopic(null); }} 
-                    className={`p-2 rounded-lg flex items-center gap-1 transition-colors ${activeTab === tab.id ? 'bg-indigo-100 text-indigo-700' : 'text-gray-500 hover:bg-gray-100'}`}
-                    title={tab.label}
-                  >
+                {[ {id: 'home', label: '主題', icon: <Home size={18}/>}, {id: 'checklist', label: '清單', icon: <SquareCheck size={18}/>}, {id: 'emergency', label: '急救', icon: <AlertTriangle size={18}/>} ].map(tab => (
+                  <button key={tab.id} onClick={() => { setActiveTab(tab.id); setSelectedTopic(null); }} className={`p-2 rounded-lg ${activeTab === tab.id ? 'bg-indigo-100 text-indigo-700' : 'text-gray-500 hover:bg-gray-100'}`}>
                     {tab.icon}
-                    <span className="hidden sm:inline text-sm font-medium">{tab.label}</span>
                   </button>
                 ))}
               </div>
@@ -172,22 +85,15 @@
           <main className="max-w-4xl mx-auto p-4 py-8">
             {activeTab === 'home' && !selectedTopic && (
               <div className="space-y-6">
-                <div className="bg-indigo-600 text-white p-8 rounded-2xl shadow-sm">
-                  <h1 className="text-2xl md:text-3xl font-bold mb-3">居家安全大追蹤</h1>
-                  <p className="opacity-90 leading-relaxed">家是孩子最常發生事故的場所(60-80%)，跟著我們一起找出隱藏的危險陷阱！</p>
+                <div className="bg-indigo-600 text-white p-8 rounded-2xl shadow-lg">
+                  <h1 className="text-2xl font-bold mb-2">居家安全大追蹤</h1>
+                  <p className="opacity-90">家是孩子最常發生事故的場所(60-80%)，跟著我們一起找出隱藏的危險陷阱！</p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {topics.map(t => (
-                    <div 
-                      key={t.id} 
-                      onClick={() => setSelectedTopic(t)} 
-                      className={`${t.color} border p-5 rounded-xl cursor-pointer hover:shadow-md transition-all flex items-center gap-4`}
-                    >
-                      <div className="flex-shrink-0 bg-white p-2 rounded-full shadow-sm">{t.icon}</div>
-                      <div>
-                        <h3 className="font-bold text-lg text-gray-900">{t.title}</h3>
-                        <p className="text-sm opacity-80 text-gray-700 mt-1">{t.description}</p>
-                      </div>
+                    <div key={t.id} onClick={() => setSelectedTopic(t)} className={`${t.color} border p-5 rounded-xl cursor-pointer hover:shadow-md flex items-center gap-4`}>
+                      {t.icon}
+                      <div><h3 className="font-bold">{t.title}</h3><p className="text-sm opacity-80">{t.description}</p></div>
                     </div>
                   ))}
                 </div>
@@ -195,52 +101,21 @@
             )}
 
             {selectedTopic && (
-              <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border">
-                <button 
-                  onClick={() => setSelectedTopic(null)} 
-                  className="text-indigo-600 mb-6 flex items-center gap-1 hover:text-indigo-800 transition-colors font-medium"
-                >
-                  <ChevronRight className="rotate-180" size={20}/> 返回主題列表
-                </button>
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="bg-gray-50 p-3 rounded-full">{selectedTopic.icon}</div>
-                  <h2 className="text-2xl font-bold text-gray-900">{selectedTopic.title}</h2>
-                </div>
-                <ul className="space-y-4 bg-gray-50 p-6 rounded-xl border border-gray-100">
-                  {selectedTopic.points.map((p, i) => (
-                    <li key={i} className="flex gap-3 text-gray-700 leading-relaxed">
-                      <div className="mt-1 text-indigo-500 flex-shrink-0"><SquareCheck size={20} /></div>
-                      {p}
-                    </li>
-                  ))}
-                </ul>
+              <div className="bg-white p-6 rounded-2xl shadow-sm border">
+                <button onClick={() => setSelectedTopic(null)} className="text-indigo-600 mb-4 flex items-center gap-1"><ChevronRight className="rotate-180" size={16}/> 返回</button>
+                <h2 className="text-xl font-bold mb-4">{selectedTopic.title}</h2>
+                <ul className="space-y-3">{selectedTopic.points.map((p, i) => <li key={i} className="flex gap-2"><div className="mt-1 text-indigo-500">●</div>{p}</li>)}</ul>
               </div>
             )}
 
             {activeTab === 'checklist' && (
-              <div className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border">
-                <div className="flex justify-between items-center mb-6 border-b pb-4">
-                  <h2 className="text-2xl font-bold text-gray-900">居家安全檢核表</h2>
-                  <div className="bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full font-bold">
-                    完成度 {score}%
-                  </div>
-                </div>
-                <div className="space-y-3">
+              <div className="bg-white p-6 rounded-2xl shadow-sm border">
+                <h2 className="text-xl font-bold mb-4">居家安全檢核表 ({score}%)</h2>
+                <div className="space-y-2">
                   {checklistItems.map(item => (
-                    <label 
-                      key={item.id} 
-                      className={`flex items-start gap-4 p-4 rounded-xl cursor-pointer transition-colors border ${checkedState[item.id] ? 'bg-indigo-50 border-indigo-200' : 'bg-gray-50 border-gray-200 hover:bg-gray-100'}`}
-                    >
-                      <input 
-                        type="checkbox" 
-                        className="mt-1 w-5 h-5 text-indigo-600 rounded focus:ring-indigo-500 cursor-pointer" 
-                        checked={!!checkedState[item.id]} 
-                        onChange={() => handleCheck(item.id)} 
-                      />
-                      <div className="flex flex-col">
-                        <span className="text-xs font-bold text-indigo-600 mb-1">{item.category}</span>
-                        <span className={`text-gray-800 ${checkedState[item.id] ? 'line-through opacity-70' : ''}`}>{item.text}</span>
-                      </div>
+                    <label key={item.id} className="flex items-start gap-3 p-3 border-b cursor-pointer">
+                      <input type="checkbox" className="mt-1 w-5 h-5" checked={!!checkedState[item.id]} onChange={() => handleCheck(item.id)} />
+                      <span className={checkedState[item.id] ? "line-through text-gray-400" : ""}>{item.text}</span>
                     </label>
                   ))}
                 </div>
@@ -249,40 +124,18 @@
 
             {activeTab === 'emergency' && (
               <div className="space-y-6">
-                <div className="bg-rose-50 p-6 md:p-8 rounded-2xl border border-rose-200 shadow-sm">
-                  <h2 className="text-xl font-bold text-rose-800 mb-4 flex items-center gap-2">
-                    <AlertTriangle size={24} className="text-rose-600"/> 誤食緊急應變
-                  </h2>
-                  <div className="bg-white p-4 rounded-xl mb-3 border border-rose-100">
-                    <p className="font-bold text-rose-700 flex items-center gap-2">
-                      <span className="text-xl">❌</span> 絕對禁止：催吐、猛灌水、嘗試酸鹼中和。
-                    </p>
-                  </div>
-                  <div className="bg-white p-4 rounded-xl border border-rose-100">
-                    <p className="font-bold text-emerald-700 flex items-center gap-2">
-                      <span className="text-xl">✅</span> 正確處理：保持鎮靜，收集誤食物品包裝，儘速就醫。
-                    </p>
-                  </div>
+                <div className="bg-rose-50 p-6 rounded-2xl border border-rose-100">
+                  <h2 className="font-bold text-rose-800 mb-4 flex items-center gap-2"><AlertTriangle size={20}/> 誤食緊急應變</h2>
+                  <p className="font-bold">❌ 絕對禁止：催吐、猛灌水、嘗試酸鹼中和。</p>
+                  <p className="mt-2 text-sm text-gray-700">✅ 正確處理：保持鎮靜，收集誤食物品包裝，儘速就醫。</p>
                 </div>
-                
-                <div className="bg-orange-50 p-6 md:p-8 rounded-2xl border border-orange-200 shadow-sm">
-                  <h2 className="text-xl font-bold text-orange-800 mb-4 flex items-center gap-2">
-                    <HeartPulse size={24} className="text-orange-600"/> 異物梗塞急救
-                  </h2>
-                  <div className="bg-white p-5 rounded-xl border border-orange-100">
-                    <ul className="space-y-3 text-gray-700 font-medium">
-                      <li className="flex items-center gap-2">👶 嬰兒：使用拍背壓胸法。</li>
-                      <li className="flex items-center gap-2">🧒 兒童及成人：使用哈姆立克急救法。</li>
-                    </ul>
-                  </div>
+                <div className="bg-orange-50 p-6 rounded-2xl border border-orange-100">
+                  <h2 className="font-bold text-orange-800 mb-4 flex items-center gap-2"><HeartPulse size={20}/> 異物梗塞急救</h2>
+                  <p className="text-sm">嬰兒使用拍背壓胸法，兒童及成人使用哈姆立克急救法。</p>
                 </div>
-                
-                <div className="text-center pt-4">
-                    <a 
-                      href="tel:119" 
-                      className="inline-flex items-center gap-3 bg-rose-600 hover:bg-rose-700 text-white px-8 py-4 rounded-full font-bold text-lg transition-transform hover:scale-105 shadow-lg shadow-rose-200"
-                    >
-                        <Phone size={24}/> 撥打 119 求援
+                <div className="text-center mt-6">
+                    <a href="tel:119" className="inline-flex items-center gap-2 bg-rose-600 text-white px-6 py-3 rounded-full font-bold">
+                        <Phone size={20}/> 撥打 119 求援
                     </a>
                 </div>
               </div>
@@ -292,8 +145,11 @@
       );
     }
 
-    const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<App />);
+    // 當文件讀取完畢後，確保 React 根節點正確渲染
+    window.addEventListener('DOMContentLoaded', () => {
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(<App />);
+    });
   </script>
 </body>
 </html>
