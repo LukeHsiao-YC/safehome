@@ -3,30 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>幼兒居家環境安全大追蹤 | 安全偵查隊</title>
+    <title>幼兒居家環境安全 | 安全偵查隊</title>
     <style>
         :root {
-            --bg-color: #faf9f6;
+            --bg-color: #fcfbf9;
             --text-main: #333333;
             --text-light: #666666;
             --primary-color: #4a90e2;
-            --highlight-color: rgba(255, 235, 59, 0.6);
+            --highlight-color: rgba(255, 235, 59, 0.7);
+            --card-bg: #ffffff;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Helvetica Neue', Arial, 'LiHei Pro', '微軟正黑體', sans-serif;
+            font-family: 'Helvetica Neue', Arial, '微軟正黑體', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
-            line-height: 1.6;
+            line-height: 1.7;
             margin: 0;
             padding: 0;
+            padding-bottom: 80px; 
         }
 
         header {
             text-align: center;
-            padding: 40px 20px;
-            background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            padding: 40px 20px 20px;
+            background-color: var(--card-bg);
         }
 
         h1 {
@@ -38,6 +43,31 @@
         .subtitle {
             font-size: 1.1rem;
             color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        /* 導覽列按鈕 */
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-buttons a {
+            text-decoration: none;
+            background-color: #f0f4f8;
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            border: 1px solid #dce4ec;
+        }
+
+        .nav-buttons a:hover {
+            background-color: var(--primary-color);
+            color: #fff;
         }
 
         .container {
@@ -46,139 +76,198 @@
             padding: 20px;
         }
 
-        /* 學霸筆記螢光筆特效 */
-        .highlight {
-            background: linear-gradient(180deg, transparent 50%, var(--highlight-color) 50%);
-            font-weight: bold;
-            padding: 0 2px;
+        .section-title {
+            text-align: center;
+            font-size: 1.5rem;
+            margin: 40px 0 20px;
+            color: #2c3e50;
         }
 
-        .section-card {
-            background: #fff;
+        .card {
+            background: var(--card-bg);
             border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
 
-        .section-card h2 {
+        .card h3 {
             border-left: 4px solid var(--primary-color);
             padding-left: 12px;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             margin-top: 0;
+        }
+
+        /* 學霸筆記螢光筆特效 */
+        .highlight {
+            background: linear-gradient(180deg, transparent 40%, var(--highlight-color) 40%);
+            font-weight: bold;
+            padding: 0 4px;
         }
 
         /* 互動檢核表樣式 */
         .checklist-item {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
             cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .checklist-item:hover {
+            background-color: #f9f9f9;
         }
 
         .checklist-item input[type="checkbox"] {
-            margin-top: 5px;
-            margin-right: 12px;
-            width: 18px;
-            height: 18px;
+            margin-top: 6px;
+            margin-right: 15px;
+            width: 20px;
+            height: 20px;
             cursor: pointer;
         }
 
         .checklist-text {
             flex: 1;
-            font-size: 1rem;
+            font-size: 1.05rem;
         }
 
+        /* 有聲書區塊特別樣式 */
+        .audiobook-card {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            text-align: center;
+            border: none;
+        }
+
+        .btn-audio {
+            display: inline-block;
+            background-color: #1976d2;
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .btn-audio:hover {
+            background-color: #1565c0;
+        }
+
+        /* 浮動進度條 */
         .progress-container {
-            position: sticky;
+            position: fixed;
             bottom: 0;
-            background: #fff;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
             padding: 15px 20px;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
             display: flex;
             align-items: center;
             gap: 15px;
+            z-index: 100;
         }
 
         .progress-bar {
             flex: 1;
-            height: 10px;
+            height: 12px;
             background: #e0e0e0;
-            border-radius: 5px;
+            border-radius: 6px;
             overflow: hidden;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .progress-fill {
             height: 100%;
             background: #4caf50;
             width: 0%;
-            transition: width 0.3s ease;
+            transition: width 0.4s ease;
         }
 
         .progress-text {
             font-weight: bold;
             color: #4caf50;
+            min-width: 45px;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>安全偵查隊：幼兒居家環境安全</h1>
-        <div class="subtitle">家，是溫暖安全的地方。讓我們用孩子的視角，找出潛在危機。</div>
+        <h1>安全偵查隊</h1>
+        <div class="subtitle">用孩子的視角，找出家中的潛在危機</div>
+        <div class="nav-buttons">
+            <a href="#knowledge">📖 安全知識區</a>
+            <a href="#checklist">✅ 居家檢核表</a>
+            <a href="#audiobook">🎧 衛教有聲書</a>
+        </div>
     </header>
 
     <div class="container">
-        <div class="section-card">
-            <h2>一、睡眠安全與防跌落</h2>
-            <p>睡眠環境的佈置是預防事故的第一步，請務必確認以下重點：</p>
+        <!-- 知識區 -->
+        <h2 id="knowledge" class="section-title">安全知識區</h2>
+        
+        <div class="card">
+            <h3>睡眠安全與防跌落</h3>
+            <p>家是兒童最常活動的地方。1歲以下嬰兒應避免趴睡與側睡，環境溫度保持25到30度。嬰幼兒睡床若有柵欄，間隙必須 <span class="highlight">小於 6 公分</span>。</p>
+            <p>陽台欄杆高度應在 <span class="highlight">110 公分以上</span>，且周圍不可放置可攀爬的傢俱，避免孩童墜落風險。</p>
+        </div>
+
+        <div class="card">
+            <h3>預防異物誤食</h3>
+            <p>四歲以下幼童容易將物品放入口中，玩具零件直徑必須 <span class="highlight">大於 3.2 公分</span>。請務必將電池、磁鐵、化妝品等零碎物件收納於嬰幼兒無法碰觸的地方。</p>
+        </div>
+
+        <div class="card">
+            <h3>燒燙傷與浴室安全</h3>
+            <p>洗澡前確認水溫，建議將熱水器水溫設定在 <span class="highlight">攝氏 50°C 以下</span>。浴室內的大型容器（如浴缸、水桶）無人使用時絕對 <span class="highlight">不可儲水</span>，預防溺水意外。</p>
+        </div>
+
+        <!-- 檢核表區域 -->
+        <h2 id="checklist" class="section-title">居家檢核表</h2>
+        
+        <div class="card">
+            <p style="color: var(--text-light); margin-top:0;">請在家中實際走動，確認以下項目是否安全：</p>
+            
             <label class="checklist-item">
                 <input type="checkbox" class="check-target">
-                <span class="checklist-text">嬰幼兒睡床有穩固的防跌落措施，若有柵欄，間隙必須 <span class="highlight">小於 6 公分</span>。</span>
+                <span class="checklist-text">嬰幼兒活動範圍內地板平坦，並鋪設防滑防撞軟墊。</span>
             </label>
             <label class="checklist-item">
                 <input type="checkbox" class="check-target">
-                <span class="checklist-text">樓梯出入口設有高於 85 公分、間隔小於 10 公分且幼童不易開啟之穩固柵欄。</span>
+                <span class="checklist-text">樓梯出入口設有高於 85 公分，幼童不易開啟的穩固柵欄。</span>
             </label>
             <label class="checklist-item">
                 <input type="checkbox" class="check-target">
-                <span class="checklist-text">陽台有堅固圍欄，高度110公分以上，且不可放置可攀爬的傢俱。</span>
+                <span class="checklist-text">電器用品放置平穩，未使用之插座已加裝安全保護蓋。</span>
+            </label>
+            <label class="checklist-item">
+                <input type="checkbox" class="check-target">
+                <span class="checklist-text">窗簾拉繩已收納至嬰幼兒無法觸碰的高度。</span>
+            </label>
+            <label class="checklist-item">
+                <input type="checkbox" class="check-target">
+                <span class="checklist-text">傢俱家飾（如花瓶、壁掛物等）平穩牢固，不易翻倒。</span>
             </label>
         </div>
 
-        <div class="section-card">
-            <h2>二、預防異物誤食</h2>
-            <p>四歲以下幼童充滿好奇心，玩具的選擇與物品收納非常關鍵：</p>
-            <label class="checklist-item">
-                <input type="checkbox" class="check-target">
-                <span class="checklist-text">選擇玩具時，請確認玩具本身及其零件直徑必須 <span class="highlight">大於 3.2 公分</span>，球型玩具直徑須大於 4.5 公分。</span>
-            </label>
-            <label class="checklist-item">
-                <input type="checkbox" class="check-target">
-                <span class="checklist-text">電池、磁鐵、化妝品等零碎物件，確實收納於嬰幼兒無法碰觸的地方。</span>
-            </label>
-        </div>
-
-        <div class="section-card">
-            <h2>三、燒燙傷與浴室安全</h2>
-            <p>浴室和廚房是隱藏危險的熱區，預先防護能大幅降低風險：</p>
-            <label class="checklist-item">
-                <input type="checkbox" class="check-target">
-                <span class="checklist-text">洗澡前確認水溫，並將熱水器水溫設定在 <span class="highlight">攝氏 50°C 以下</span>。</span>
-            </label>
-            <label class="checklist-item">
-                <input type="checkbox" class="check-target">
-                <span class="checklist-text">家中若有大型容器（如：浴缸、水桶等），無人使用時絕對 <span class="highlight">不可儲水</span>。</span>
-            </label>
-            <label class="checklist-item">
-                <input type="checkbox" class="check-target">
-                <span class="checklist-text">未使用之插座（插孔）已加裝安全保護蓋，電線置高於110公分或妥善隱蔽。</span>
-            </label>
+        <!-- 有聲書區域 -->
+        <h2 id="audiobook" class="section-title">衛教有聲書</h2>
+        
+        <div class="card audiobook-card">
+            <h3 style="border:none; font-size: 1.4rem; color: #1565c0; margin-bottom: 10px;">用聽的居家安全指南</h3>
+            <p style="color: #333;">沒時間盯著螢幕嗎？點擊下方按鈕，一邊做家事一邊聆聽完整的居家安全衛教內容。</p>
+            <a href="https://hlm.tzuchi.com.tw/home/index.php/team-ped/home-safety2023" target="_blank" class="btn-audio">🎧 點我收聽有聲書</a>
         </div>
     </div>
 
+    <!-- 浮動進度條 -->
     <div class="progress-container">
-        <div style="font-size: 0.9rem; color: #666;">居家安全防護力</div>
+        <div style="font-size: 0.95rem; color: #555; white-space: nowrap;">安全達成率</div>
         <div class="progress-bar">
             <div class="progress-fill" id="progressFill"></div>
         </div>
@@ -186,7 +275,6 @@
     </div>
 
     <script>
-        // 計算檢核表進度的簡單邏輯
         const checkboxes = document.querySelectorAll('.check-target');
         const progressFill = document.getElementById('progressFill');
         const progressText = document.getElementById('progressText');
@@ -200,7 +288,7 @@
             progressText.textContent = percentage + '%';
 
             if(percentage === 100) {
-                progressText.textContent = '100% 達成！守護滿分！';
+                progressText.textContent = '100% 滿分！';
                 progressText.style.color = '#e91e63';
                 progressFill.style.background = '#e91e63';
             } else {
