@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安全偵查隊 | 衛教有聲書</title>
+    <style>
+        :root {
+            --bg-color: #fcfbf9;
+            --primary-color: #4a90e2;
+            --card-bg: #ffffff;
+        }
+        body {
+            font-family: 'Helvetica Neue', Arial, '微軟正黑體', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0; padding: 0;
+        }
+        header {
+            text-align: center;
+            padding: 40px 20px 20px;
+            background-color: var(--card-bg);
+            border-bottom: 1px solid #eee;
+        }
+        h1 { color: var(--primary-color); margin-bottom: 10px; }
+        .nav-links {
+            display: flex; justify-content: center; gap: 15px; margin-top: 20px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            background-color: #f0f4f8;
+            color: var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            border: 1px solid #dce4ec;
+        }
+        .nav-links a.active {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+        .container { max-width: 600px; margin: 50px auto; padding: 0 20px; text-align: center; }
+        .audiobook-card {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-radius: 12px;
+            padding: 40px 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .btn-audio {
+            display: inline-block;
+            background-color: #1976d2;
+            color: white;
+            text-decoration: none;
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+        .btn-audio:hover { background-color: #1565c0; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>安全偵查隊</h1>
+        <div style="color: #666;">讓耳朵代替眼睛，隨時補充衛教知識</div>
+        <div class="nav-links">
+            <a href="index.html">安全知識區</a>
+            <a href="checklist.html">居家檢核表</a>
+            <a href="audio.html" class="active">衛教有聲書</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="audiobook-card">
+            <h2 style="color: #1565c0; margin-top: 0;">用聽的居家安全指南</h2>
+            <p style="color: #333; font-size: 1.1rem;">
+                照顧孩子非常忙碌，沒時間盯著螢幕也沒關係。<br><br>
+                點擊下方按鈕，連結至花蓮慈濟醫院的資源，讓你可以一邊做家事，一邊聆聽完整的居家安全衛教內容。
+            </p>
+            <a href="https://hlm.tzuchi.com.tw/home/index.php/team-ped/home-safety2023" target="_blank" class="btn-audio">點擊前往收聽有聲書</a>
+        </div>
+    </div>
+</body>
+</html>
