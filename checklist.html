@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安全偵查隊 | 居家安全檢核表</title>
+    <style>
+        :root {
+            --bg-color: #fcfbf9;
+            --text-main: #333333;
+            --primary-color: #4a90e2;
+            --card-bg: #ffffff;
+            --highlight-color: rgba(255, 235, 59, 0.7);
+        }
+        body {
+            font-family: 'Helvetica Neue', Arial, '微軟正黑體', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            padding-bottom: 80px;
+        }
+        header {
+            text-align: center;
+            padding: 40px 20px 20px;
+            background-color: var(--card-bg);
+            border-bottom: 1px solid #eee;
+        }
+        h1 { color: var(--primary-color); margin-bottom: 10px; }
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .nav-links a {
+            text-decoration: none;
+            background-color: #f0f4f8;
+            color: var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            border: 1px solid #dce4ec;
+        }
+        .nav-links a.active {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+        .container { max-width: 800px; margin: 30px auto; padding: 0 20px; }
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .card h2 { border-bottom: 2px solid #eee; padding-bottom: 10px; color: #2c3e50; }
+        .highlight {
+            background: linear-gradient(180deg, transparent 40%, var(--highlight-color) 40%);
+            font-weight: bold;
+            padding: 0 4px;
+        }
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+        .checklist-item:hover { background-color: #f0f0f0; }
+        .checklist-item input { margin-top: 6px; margin-right: 15px; width: 20px; height: 20px; }
+        .checklist-text { flex: 1; font-size: 1.05rem; }
+        
+        .progress-container {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 20px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
+            display: flex; align-items: center; gap: 15px;
+        }
+        .progress-bar { flex: 1; height: 12px; background: #e0e0e0; border-radius: 6px; overflow: hidden; }
+        .progress-fill { height: 100%; background: #4caf50; width: 0%; transition: width 0.3s; }
+        .progress-text { font-weight: bold; color: #4caf50; min-width: 50px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>安全偵查隊</h1>
+        <div style="color: #666;">拿起手機，逐一確認家中的安全防護</div>
+        <div class="nav-links">
+            <a href="index.html">安全知識區</a>
+            <a href="checklist.html" class="active">居家檢核表</a>
+            <a href="audio.html">衛教有聲書</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <p style="text-align: center; color: #666;">資料來源:國民健康署 兒童居家安全環境檢視手冊</p>
+
+        <div class="card">
+            <h2>一、防跌倒與防墜落</h2>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">嬰幼兒活動範圍內地板平坦，並鋪設防滑防撞軟墊。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">嬰幼兒睡床有穩固的防跌落措施，邊緣做圓角處理，柵欄間隙 <span class="highlight">小於 6 公分</span>。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">陽台有堅固圍欄，高度 <span class="highlight">110 公分以上</span>，底部與地面間隔低於 15 公分，欄杆間隔小於 6 公分。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">陽台不可放置可攀爬的傢俱、玩具、花盆等雜物。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">窗戶設有防跌落的安全裝置(嬰幼兒無法自行開啟)。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">樓梯出入口設有高度 <span class="highlight">大於 85 公分</span>、間隔小於 10 公分的穩固柵欄。</span></label>
+        </div>
+
+        <div class="card">
+            <h2>二、防壓砸與防夾傷</h2>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">傢俱家飾(如花瓶、壁掛物)平穩牢固，不易滑動或翻倒。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">餐桌或茶几未舖桌巾。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">摺疊家具(桌椅、梯子、燙馬)置於嬰幼兒無法觸碰的地方。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">抽屜與櫥櫃已加裝嬰幼兒不易開啟的安全釦環。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">電器用品放置平穩，電扇具有細格防護網。</span></label>
+        </div>
+
+        <div class="card">
+            <h2>三、防燒燙傷與用電安全</h2>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">插座及電線固定隱蔽，或置於高度 <span class="highlight">110 公分以上</span>。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">未使用之插座已加裝安全保護蓋。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">熱水器水溫設定在 <span class="highlight">攝氏 50°C 以下</span>。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">易燃物品(蠟燭、打火機)與發熱電器收在兒童無法拿取的地方。</span></label>
+        </div>
+
+        <div class="card">
+            <h2>四、防窒息、溺水與異物梗塞</h2>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">窗簾拉繩為嬰幼兒無法觸碰的高度。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">浴室內大型容器(浴缸、水桶)，無人使用時未儲水。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">電池、零碎物件、化妝品收納妥當。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">玩具本身及其零件直徑大於 3.2 公分，長度大於 5.7 公分。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">玩具附有之繩索，絕不超過 15-20 公分。</span></label>
+        </div>
+    </div>
+
+    <div class="progress-container">
+        <div style="font-size: 0.95rem; color: #555;">完成進度</div>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="progress-text" id="progressText">0%</div>
+    </div>
+
+    <script>
+        const checkboxes = document.querySelectorAll('.check-target');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+
+        function updateProgress() {
+            const total = checkboxes.length;
+            const checked = document.querySelectorAll('.check-target:checked').length;
+            const percentage = Math.round((checked / total) * 100);
+            
+            progressFill.style.width = percentage + '%';
+            progressText.textContent = percentage + '%';
+
+            if(percentage === 100) {
+                progressText.textContent = '100% 滿分！';
+                progressText.style.color = '#e91e63';
+                progressFill.style.background = '#e91e63';
+            } else {
+                progressText.style.color = '#4caf50';
+                progressFill.style.background = '#4caf50';
+            }
+        }
+        checkboxes.forEach(box => box.addEventListener('change', updateProgress));
+    </script>
+</body>
+</html>
