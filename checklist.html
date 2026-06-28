@@ -19,7 +19,7 @@
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            padding-bottom: 80px;
+            padding-bottom: 90px;
         }
         header {
             text-align: center;
@@ -33,6 +33,7 @@
             justify-content: center;
             gap: 15px;
             margin-top: 20px;
+            flex-wrap: wrap;
         }
         .nav-links a {
             text-decoration: none;
@@ -55,7 +56,7 @@
             margin-bottom: 25px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.04);
         }
-        .card h2 { border-bottom: 2px solid #eee; padding-bottom: 10px; color: #2c3e50; }
+        .card h2 { border-bottom: 2px solid #eee; padding-bottom: 10px; color: #2c3e50; font-size: 1.3rem;}
         .highlight {
             background: linear-gradient(180deg, transparent 40%, var(--highlight-color) 40%);
             font-weight: bold;
@@ -66,82 +67,136 @@
             align-items: flex-start;
             margin-bottom: 15px;
             cursor: pointer;
-            padding: 10px;
+            padding: 12px;
             border-radius: 8px;
             background-color: #fafafa;
+            transition: background-color 0.2s;
         }
-        .checklist-item:hover { background-color: #f0f0f0; }
-        .checklist-item input { margin-top: 6px; margin-right: 15px; width: 20px; height: 20px; }
+        .checklist-item:hover { background-color: #f0f4f8; }
+        .checklist-item input { margin-top: 4px; margin-right: 15px; width: 22px; height: 22px; flex-shrink: 0;}
         .checklist-text { flex: 1; font-size: 1.05rem; }
         
+        .alert-box {
+            background-color: #fff3f3;
+            border-left: 4px solid #ff5252;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.95rem;
+            color: #d32f2f;
+        }
+
         .progress-container {
             position: fixed;
             bottom: 0; left: 0; right: 0;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             padding: 15px 20px;
             box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
             display: flex; align-items: center; gap: 15px;
+            z-index: 100;
         }
-        .progress-bar { flex: 1; height: 12px; background: #e0e0e0; border-radius: 6px; overflow: hidden; }
-        .progress-fill { height: 100%; background: #4caf50; width: 0%; transition: width 0.3s; }
-        .progress-text { font-weight: bold; color: #4caf50; min-width: 50px; }
+        .progress-bar-wrapper {
+            flex: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .progress-bar { flex: 1; height: 14px; background: #e0e0e0; border-radius: 7px; overflow: hidden; }
+        .progress-fill { height: 100%; background: #4caf50; width: 0%; transition: width 0.4s ease-out; }
+        .progress-text { font-weight: bold; color: #4caf50; min-width: 50px; font-size: 1.1rem;}
     </style>
 </head>
 <body>
     <header>
         <h1>安全偵查隊</h1>
-        <div style="color: #666;">拿起手機，逐一確認家中的安全防護</div>
+        <div style="color: #666;">拿起手機，為家裡的「安全」打分數</div>
         <div class="nav-links">
             <a href="index.html">安全知識區</a>
             <a href="checklist.html" class="active">居家檢核表</a>
             <a href="audio.html">衛教有聲書</a>
+            <a href="interactive.html">互動尋寶區</a>
         </div>
     </header>
 
     <div class="container">
-        <p style="text-align: center; color: #666;">資料來源:國民健康署 兒童居家安全環境檢視手冊</p>
+        <p style="text-align: center; color: #666; font-size: 0.9rem;">
+            資料來源：國民健康署 兒童居家安全環境檢視手冊<br>
+            花蓮慈濟醫院 東部兒童少年保護醫療區域整合中心
+        </p>
 
         <div class="card">
-            <h2>一、防跌倒與防墜落</h2>
+            <h2>一、睡眠安全 (5不原則)</h2>
+            <div class="alert-box">
+                💡 <strong>醫師貼心提醒：</strong>餵食完寶寶後，也要小心睡眠中的溢吐奶情形！
+            </div>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text"><strong>不趴睡：</strong>嬰兒趴睡容易發生窒息，側睡也可能翻成趴睡，<span class="highlight">仰睡為最正確的睡姿</span>。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text"><strong>不用枕：</strong>嬰兒<span class="highlight">不需使用枕頭</span>。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text"><strong>不同床：</strong>嬰兒與父母或多胞胎兄弟姊妹都要<span class="highlight">「同室不同床」</span>。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text"><strong>不悶熱：</strong>避免環境過熱，勿穿著太多衣物，保暖可利用睡袋型睡衣或包巾，並露出手臂及臉部。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text"><strong>不鬆軟：</strong>嬰兒睡眠區域，<span class="highlight">不宜有枕頭、棉被、毯子、玩偶</span>，並且床墊應選擇平滑堅實。</span></label>
+        </div>
+
+        <div class="card">
+            <h2>二、跌倒、墜落事故預防策略</h2>
             <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">嬰幼兒活動範圍內地板平坦，並鋪設防滑防撞軟墊。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">嬰幼兒睡床外觀無掉漆、剝落、生鏽、鬆動等狀況；附屬配件或自行加裝之附件穩固。</span></label>
             <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">嬰幼兒睡床有穩固的防跌落措施，邊緣做圓角處理，柵欄間隙 <span class="highlight">小於 6 公分</span>。</span></label>
-            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">陽台有堅固圍欄，高度 <span class="highlight">110 公分以上</span>，底部與地面間隔低於 15 公分，欄杆間隔小於 6 公分。</span></label>
-            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">陽台不可放置可攀爬的傢俱、玩具、花盆等雜物。</span></label>
-            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">窗戶設有防跌落的安全裝置(嬰幼兒無法自行開啟)。</span></label>
-            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">樓梯出入口設有高度 <span class="highlight">大於 85 公分</span>、間隔小於 10 公分的穩固柵欄。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">陽台有堅固圍欄/圍牆且高度 <span class="highlight">110 公分以上</span>，底部與地面間隔低於 15 公分，欄杆間隔小於 6 公分或有避免鑽爬裝置。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">陽台<span class="highlight">不可放置</span>可攀爬的傢俱、玩具、花盆等雜物或橫式欄杆。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">窗戶設有防跌落的安全裝置(嬰幼兒無法自行開啟或加設護欄)。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">樓梯欄杆完好且堅固，欄杆間距應 <span class="highlight">小於 10 公分</span>；臺階高度一致，且貼有止滑條。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">樓梯出入口設有高度 <span class="highlight">大於 85 公分</span>、間隔小於 10 公分及幼童不易開啟的穩固柵欄。</span></label>
         </div>
 
         <div class="card">
-            <h2>二、防壓砸與防夾傷</h2>
-            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">傢俱家飾(如花瓶、壁掛物)平穩牢固，不易滑動或翻倒。</span></label>
-            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">餐桌或茶几未舖桌巾。</span></label>
+            <h2>三、壓砸夾刺撞傷事故預防策略</h2>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">電器用品放置平穩不易傾倒；電扇具有細格防護網。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">鐵捲門開關及遙控器放在嬰幼兒無法觸碰的地方；且裝有偵測到物體立即停止的安全裝置。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">傢俱家飾(如雕塑品、花瓶、壁掛物等)平穩牢固，不易滑動或翻倒；且無凸角銳利邊緣。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">櫥櫃加裝嬰幼兒不易開啟之裝置；抽屜加裝安全釦環(或上鎖)。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">餐桌或茶几 <span class="highlight">未舖桌巾</span>。</span></label>
             <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">摺疊家具(桌椅、梯子、燙馬)置於嬰幼兒無法觸碰的地方。</span></label>
-            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">抽屜與櫥櫃已加裝嬰幼兒不易開啟的安全釦環。</span></label>
-            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">電器用品放置平穩，電扇具有細格防護網。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">盡量避免使用孔洞椅子，以避免手指卡住。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">維修工具、尖利刀器、易燃物品、零碎物件、化妝飾品、塑膠袋等危險物品收好。</span></label>
         </div>
 
         <div class="card">
-            <h2>三、防燒燙傷與用電安全</h2>
-            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">插座及電線固定隱蔽，或置於高度 <span class="highlight">110 公分以上</span>。</span></label>
-            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">未使用之插座已加裝安全保護蓋。</span></label>
-            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">熱水器水溫設定在 <span class="highlight">攝氏 50°C 以下</span>。</span></label>
-            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">易燃物品(蠟燭、打火機)與發熱電器收在兒童無法拿取的地方。</span></label>
+            <h2>四、燒燙傷事故預防策略</h2>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">插座及電線固定、隱蔽或置高於 <span class="highlight">110 公分</span>；未使用之插座加裝安全保護蓋。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">檯燈、飲水機、熱水瓶、微波爐、烤箱、電熨斗等發熱電器，置於無法觸碰的地方；有門的電器可使用防開啟裝置。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">洗澡將熱水器水溫設定在 <span class="highlight">攝氏 50°C 以下</span>。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">將易燃燒物品(蠟燭、打火機、火柴)收在兒童無法拿取的地方。</span></label>
         </div>
 
         <div class="card">
-            <h2>四、防窒息、溺水與異物梗塞</h2>
-            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">窗簾拉繩為嬰幼兒無法觸碰的高度。</span></label>
-            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">浴室內大型容器(浴缸、水桶)，無人使用時未儲水。</span></label>
-            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">電池、零碎物件、化妝品收納妥當。</span></label>
-            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">玩具本身及其零件直徑大於 3.2 公分，長度大於 5.7 公分。</span></label>
-            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">玩具附有之繩索，絕不超過 15-20 公分。</span></label>
+            <h2>五、窒息與溺水事故預防策略</h2>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">窗簾拉繩收納為嬰幼兒無法觸碰的高度。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">密閉電器(如:洗衣機、烘乾機、冰箱等)嬰幼兒無法自行開啟，或放置位置遠離嬰幼兒。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">家中若有大型容器(如:浴缸、水桶等)，無人使用時 <span class="highlight">不可儲水</span>。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">避免讓小孩接近塑膠袋、有拉鍊的袋子、柔軟枕頭。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">建立安全的兒童睡眠環境(四個月以下頸椎尚未發育完全嬰幼兒尤須注意)。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">玩具附有之繩索或鬆緊帶套環，絕 <span class="highlight">不能超過 15-20 公分</span>。</span></label>
         </div>
+
+        <div class="card">
+            <h2>六、梗塞、異物吞食/誤塞預防策略</h2>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">電池、零碎物件、磁鐵、化妝飾品等收納於嬰幼兒無法碰觸的地方。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">小孩哭泣、奔跑時、玩耍時應避免同時餵食物。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">避免讓4歲以下幼兒在沒有成人戒護下，接觸易引起梗塞的固體食物 (如：果凍、軟糖、含骨頭肉類、整顆種子與堅果、有籽的水果與整口花生醬)。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">選擇有國內外商品檢驗標識的玩具 (如 ST、CE、ASTM 標誌)，且零件必須牢固。</span></label>
+            <label class="checklist-item"><input type="checkbox" class="check-target"><span class="checklist-text">玩具本身及其零件須 <span class="highlight">大於直徑 3.2 公分</span>；長度大於 5.7 公分；球型/擠壓玩具 <span class="highlight">直徑須大於 4.5 公分</span>。</span></label>
+        </div>
+
     </div>
 
     <div class="progress-container">
-        <div style="font-size: 0.95rem; color: #555;">完成進度</div>
-        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-        <div class="progress-text" id="progressText">0%</div>
+        <div class="progress-bar-wrapper">
+            <div style="font-size: 0.95rem; color: #555; white-space: nowrap;">完成進度</div>
+            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+            <div class="progress-text" id="progressText">0%</div>
+        </div>
     </div>
 
     <script>
@@ -166,7 +221,10 @@
                 progressFill.style.background = '#4caf50';
             }
         }
-        checkboxes.forEach(box => box.addEventListener('change', updateProgress));
+        
+        checkboxes.forEach(box => {
+            box.addEventListener('change', updateProgress);
+        });
     </script>
 </body>
 </html>
