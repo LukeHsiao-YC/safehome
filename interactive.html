@@ -3,51 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>安全偵查隊 | 互動尋寶專區</title>
+    <title>安全小偵探!GOGO! | 小偵探大挑戰</title>
     <style>
         :root {
             --bg-color: #fcfbf9;
+            --text-main: #333333;
+            --text-light: #666666;
             --primary-color: #4a90e2;
             --card-bg: #ffffff;
-            --highlight-color: rgba(255, 235, 59, 0.7);
+            --border-color: #eaeaea;
         }
         
         body {
             font-family: 'Helvetica Neue', Arial, '微軟正黑體', sans-serif;
             background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.8;
             margin: 0;
             padding: 0;
-            color: #333;
+            padding-bottom: 60px;
         }
 
+        /* */
         header {
             text-align: center;
             padding: 40px 20px 20px;
             background-color: var(--card-bg);
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        h1 { color: var(--primary-color); margin-bottom: 10px; }
-        
-        .nav-links {
-            display: flex; justify-content: center; gap: 15px; margin-top: 20px;
+        h1 { 
+            color: var(--primary-color); 
+            margin-bottom: 10px; 
+            letter-spacing: 1px;
         }
-        
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
         .nav-links a {
             text-decoration: none;
             background-color: #f0f4f8;
             color: var(--primary-color);
-            padding: 10px 20px;
+            padding: 8px 18px;
             border-radius: 20px;
             font-weight: bold;
+            font-size: 0.95rem;
             border: 1px solid #dce4ec;
+            transition: all 0.2s ease;
         }
 
-        .nav-links a.active {
+        .nav-links a.active, .nav-links a:hover {
             background-color: var(--primary-color);
             color: #fff;
         }
 
+        /* */
         .container {
             max-width: 900px;
             margin: 40px auto;
@@ -55,151 +71,131 @@
             text-align: center;
         }
 
-        /* 互動區域的主要容器 */
-        .interactive-room {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            height: 500px;
-            margin: 0 auto;
-            /* 這裡之後可以換成你的背景圖片 URL */
-            background-color: #e0e6ed;
-            background-image: url('https://via.placeholder.com/800x500/e0e6ed/90a4ae?text=請將此處替換為您的居家空間圖片');
-            background-size: cover;
-            background-position: center;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-
-        /* 熱區標記點 */
-        .hotspot {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background-color: rgba(255, 87, 34, 0.8);
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 0 0 0 rgba(255, 87, 34, 0.7);
-            animation: pulse 2s infinite;
-            transform: translate(-50%, -50%);
-        }
-
-        /* 讓標記點有呼吸燈的特效，吸引點擊 */
-        @keyframes pulse {
-            0% { transform: translate(-50%, -50%) scale(0.95); box-shadow: 0 0 0 0 rgba(255, 87, 34, 0.7); }
-            70% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 15px rgba(255, 87, 34, 0); }
-            100% { transform: translate(-50%, -50%) scale(0.95); box-shadow: 0 0 0 0 rgba(255, 87, 34, 0); }
-        }
-
-        /* 提示資訊框 (預設隱藏) */
-        .tooltip {
-            position: absolute;
-            bottom: 45px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 220px;
-            background-color: #fff;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            text-align: left;
-            pointer-events: none;
-            z-index: 10;
-        }
-
-        /* 提示框的小三角形 */
-        .tooltip::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -8px;
-            border-width: 8px;
-            border-style: solid;
-            border-color: #fff transparent transparent transparent;
-        }
-
-        /* 滑鼠移上去時顯示提示框 */
-        .hotspot:hover .tooltip {
-            opacity: 1;
-            visibility: visible;
-            bottom: 40px;
-        }
-
-        .tooltip h4 {
-            margin: 0 0 8px 0;
-            color: var(--primary-color);
+        .intro-text {
             font-size: 1.1rem;
-            border-bottom: 2px solid #f0f4f8;
-            padding-bottom: 4px;
+            color: #444;
+            margin-bottom: 30px;
         }
 
-        .tooltip p {
-            margin: 0;
-            font-size: 0.95rem;
-            line-height: 1.5;
+        /* 使用 CSS Grid 排版圖片，手機單排，平板/電腦雙排 */
+        .image-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
         }
 
-        .highlight {
-            background: linear-gradient(180deg, transparent 40%, var(--highlight-color) 40%);
+        @media (min-width: 600px) {
+            .image-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .challenge-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
+        }
+
+        .challenge-image:hover {
+            transform: translateY(-5px);
+        }
+
+        /* */
+        .download-section {
+            background-color: #fff3e0;
+            padding: 30px;
+            border-radius: 16px;
+            border: 2px dashed #ff9800;
+            margin-top: 20px;
+        }
+
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+            color: white;
+            text-decoration: none;
+            padding: 16px 40px;
+            border-radius: 30px;
+            font-size: 1.2rem;
             font-weight: bold;
+            box-shadow: 0 4px 12px rgba(245, 124, 0, 0.3);
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .btn-download:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(245, 124, 0, 0.4);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-top: 40px;
+            border-top: 1px solid var(--border-color);
+            background-color: #fff;
         }
     </style>
 </head>
 <body>
-
     <header>
-        <h1>安全偵查隊</h1>
-        <div style="color: #666;">移動滑鼠找找看，家裡藏著哪些危險？</div>
+        <h1>安全小偵探!GOGO!</h1>
+        <div style="color: var(--text-light);">跟著小偵探，一起找出家裡的危險角落!<br>跟著小皮的腳步，一起複習一下成衛安全小偵探的秘訣吧!建議可以搭配<strong>唉唷喂呀，我的家</strong>一起玩喔!</div>
+        
+        <!-- -->
         <div class="nav-links">
             <a href="index.html">安全知識區</a>
             <a href="checklist.html">居家檢核表</a>
-            <a href="audio.html">衛教有聲書</a>
-            <a href="interactive.html" class="active">互動尋寶區</a>
+            <a href="audio.html">繪本與有聲書</a>
+            <!-- 更新了導覽列名稱 -->
+            <a href="interactive.html" class="active">小偵探大挑戰</a> 
         </div>
     </header>
 
     <div class="container">
         
-        <div class="interactive-room">
-            <div class="hotspot" style="top: 70%; left: 25%;">
-                <div class="tooltip">
-                    <h4>嬰兒床睡眠安全</h4>
-                    <p>請維持堅實的鋪面，<span class="highlight">仰睡可減少嬰兒猝死</span>風險，且柵欄間隙必須小於 6 公分。</p>
-                </div>
-            </div>
-
-            <div class="hotspot" style="top: 65%; left: 55%;">
-                <div class="tooltip">
-                    <h4>尖銳桌角防護</h4>
-                    <p>幼兒剛學走容易跌倒，此處<span class="highlight">須加裝防撞保護套</span>，並確認桌上未鋪設容易被拉扯的桌巾。</p>
-                </div>
-            </div>
-
-            <div class="hotspot" style="top: 80%; left: 80%;">
-                <div class="tooltip">
-                    <h4>用電安全</h4>
-                    <p>未使用之插座（插孔）請務必<span class="highlight">加裝安全保護蓋</span>，避免幼兒拿異物戳入觸電。</p>
-                </div>
-            </div>
-
-            <div class="hotspot" style="top: 30%; left: 15%;">
-                <div class="tooltip">
-                    <h4>防墜落裝置</h4>
-                    <p>窗戶應設有防跌落的安全裝置，且窗簾拉繩必須收納至嬰幼兒無法觸碰的高度。</p>
-                </div>
-            </div>
+        <div class="intro-text">
+            爸爸媽媽，準備好和孩子一起挑戰了嗎？<br>
+            看看下面的圖片，試著找出可能隱藏危險的地方吧！
         </div>
-        
-        <p style="margin-top: 20px; color: #666; font-size: 0.9rem;">
-            提示：將滑鼠游標移動到發光的橘色圓點上，查看該區域的安全防護重點。
-        </p>
+
+        <!-- -->
+        <div class="image-grid">
+            <!-- 加入了 placeholder 防止圖片未上傳時破圖，並設定了適當的寬高比 -->
+            <img src="P1.png" alt="小偵探挑戰圖 1" class="challenge-image" onerror="this.onerror=null; this.src='https://placehold.co/800x600/e0e6ed/666?text=圖片+P1+準備中';">
+            <img src="P2.png" alt="小偵探挑戰圖 2" class="challenge-image" onerror="this.onerror=null; this.src='https://placehold.co/800x600/e0e6ed/666?text=圖片+P2+準備中';">
+            <img src="P3.png" alt="小偵探挑戰圖 3" class="challenge-image" onerror="this.onerror=null; this.src='https://placehold.co/800x600/e0e6ed/666?text=圖片+P3+準備中';">
+            <img src="P4.png" alt="小偵探挑戰圖 4" class="challenge-image" onerror="this.onerror=null; this.src='https://placehold.co/800x600/e0e6ed/666?text=圖片+P4+準備中';">
+        </div>
+
+        <!-- -->
+        <div class="download-section">
+            <div style="font-size: 1.3rem; font-weight: bold; color: #e65100; margin-bottom: 10px;">
+                🕵️‍♂️ 想親自動手畫一畫嗎？
+            </div>
+            <div style="color: #666; margin-bottom: 20px;">
+                點擊下方按鈕下載 PDF 學習單，印出來和孩子一起當個專業的安全小偵探！
+            </div>
+            
+            <!-- 下載連結：這裡使用 download 屬性提示瀏覽器下載檔案 -->
+            <a href="安全小偵探! GOGO!! 蕭宇超.pdf" download="安全小偵探!_GOGO!!_蕭宇超.pdf" class="btn-download">
+                📥 下載學習單 (PDF)
+            </a>
+        </div>
 
     </div>
 
+    <footer>
+        蕭宇超醫師整理
+    </footer>
 </body>
 </html>
