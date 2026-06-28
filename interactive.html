@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>安全偵查隊 | 互動尋寶專區</title>
+    <style>
+        :root {
+            --bg-color: #fcfbf9;
+            --primary-color: #4a90e2;
+            --card-bg: #ffffff;
+            --highlight-color: rgba(255, 235, 59, 0.7);
+        }
+        
+        body {
+            font-family: 'Helvetica Neue', Arial, '微軟正黑體', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px 20px;
+            background-color: var(--card-bg);
+            border-bottom: 1px solid #eee;
+        }
+
+        h1 { color: var(--primary-color); margin-bottom: 10px; }
+        
+        .nav-links {
+            display: flex; justify-content: center; gap: 15px; margin-top: 20px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            background-color: #f0f4f8;
+            color: var(--primary-color);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            border: 1px solid #dce4ec;
+        }
+
+        .nav-links a.active {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        /* 互動區域的主要容器 */
+        .interactive-room {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 500px;
+            margin: 0 auto;
+            /* 這裡之後可以換成你的背景圖片 URL */
+            background-color: #e0e6ed;
+            background-image: url('https://via.placeholder.com/800x500/e0e6ed/90a4ae?text=請將此處替換為您的居家空間圖片');
+            background-size: cover;
+            background-position: center;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        /* 熱區標記點 */
+        .hotspot {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: rgba(255, 87, 34, 0.8);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 0 0 rgba(255, 87, 34, 0.7);
+            animation: pulse 2s infinite;
+            transform: translate(-50%, -50%);
+        }
+
+        /* 讓標記點有呼吸燈的特效，吸引點擊 */
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(0.95); box-shadow: 0 0 0 0 rgba(255, 87, 34, 0.7); }
+            70% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 0 0 15px rgba(255, 87, 34, 0); }
+            100% { transform: translate(-50%, -50%) scale(0.95); box-shadow: 0 0 0 0 rgba(255, 87, 34, 0); }
+        }
+
+        /* 提示資訊框 (預設隱藏) */
+        .tooltip {
+            position: absolute;
+            bottom: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 220px;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            text-align: left;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* 提示框的小三角形 */
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -8px;
+            border-width: 8px;
+            border-style: solid;
+            border-color: #fff transparent transparent transparent;
+        }
+
+        /* 滑鼠移上去時顯示提示框 */
+        .hotspot:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+            bottom: 40px;
+        }
+
+        .tooltip h4 {
+            margin: 0 0 8px 0;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            border-bottom: 2px solid #f0f4f8;
+            padding-bottom: 4px;
+        }
+
+        .tooltip p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .highlight {
+            background: linear-gradient(180deg, transparent 40%, var(--highlight-color) 40%);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>安全偵查隊</h1>
+        <div style="color: #666;">移動滑鼠找找看，家裡藏著哪些危險？</div>
+        <div class="nav-links">
+            <a href="index.html">安全知識區</a>
+            <a href="checklist.html">居家檢核表</a>
+            <a href="audio.html">衛教有聲書</a>
+            <a href="interactive.html" class="active">互動尋寶區</a>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <div class="interactive-room">
+            <div class="hotspot" style="top: 70%; left: 25%;">
+                <div class="tooltip">
+                    <h4>嬰兒床睡眠安全</h4>
+                    <p>請維持堅實的鋪面，<span class="highlight">仰睡可減少嬰兒猝死</span>風險，且柵欄間隙必須小於 6 公分。</p>
+                </div>
+            </div>
+
+            <div class="hotspot" style="top: 65%; left: 55%;">
+                <div class="tooltip">
+                    <h4>尖銳桌角防護</h4>
+                    <p>幼兒剛學走容易跌倒，此處<span class="highlight">須加裝防撞保護套</span>，並確認桌上未鋪設容易被拉扯的桌巾。</p>
+                </div>
+            </div>
+
+            <div class="hotspot" style="top: 80%; left: 80%;">
+                <div class="tooltip">
+                    <h4>用電安全</h4>
+                    <p>未使用之插座（插孔）請務必<span class="highlight">加裝安全保護蓋</span>，避免幼兒拿異物戳入觸電。</p>
+                </div>
+            </div>
+
+            <div class="hotspot" style="top: 30%; left: 15%;">
+                <div class="tooltip">
+                    <h4>防墜落裝置</h4>
+                    <p>窗戶應設有防跌落的安全裝置，且窗簾拉繩必須收納至嬰幼兒無法觸碰的高度。</p>
+                </div>
+            </div>
+        </div>
+        
+        <p style="margin-top: 20px; color: #666; font-size: 0.9rem;">
+            提示：將滑鼠游標移動到發光的橘色圓點上，查看該區域的安全防護重點。
+        </p>
+
+    </div>
+
+</body>
+</html>
