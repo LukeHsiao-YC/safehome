@@ -33,6 +33,7 @@
             justify-content: center;
             gap: 15px;
             margin-top: 20px;
+            flex-wrap: wrap; /* 讓按鈕在手機版可以自動換行 */
         }
         .nav-links a {
             text-decoration: none;
@@ -69,6 +70,14 @@
         }
         ul { padding-left: 20px; }
         li { margin-bottom: 10px; }
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-top: 40px;
+            border-top: 1px solid #eee;
+        }
     </style>
 </head>
 <body>
@@ -79,6 +88,7 @@
             <a href="index.html" class="active">安全知識區</a>
             <a href="checklist.html">居家檢核表</a>
             <a href="audio.html">衛教有聲書</a>
+            <a href="interactive.html">互動尋寶區</a>
         </div>
     </header>
 
@@ -128,5 +138,9 @@
             <p>外出戲水時，兒童溺水是無聲的。如果看到孩子頭在水下嘴巴喘氣、眼神恐懼呆滯、頭髮遮眼、或是動作像在攀爬隱形樓梯，請立刻警覺。</p>
         </div>
     </div>
+
+    <footer>
+        蕭宇超醫師整理
+    </footer>
 </body>
 </html>
